@@ -1,8 +1,8 @@
 from .base_page import BasePage
 from final_project.locators import MainPageLocators
-
+import time
 class ProductPage(BasePage):
-    def guest_can_add_product_to_basket(self):
+    def test_guest_can_add_product_to_basket(self):
         self.names_of_product()
         self.check_and_click_on_button_add()
         self.guest_can_count_function_get_code()
@@ -10,8 +10,21 @@ class ProductPage(BasePage):
         self.check_product_price()
         self.check_all_mesage()
 
+    def test_guest_can_see_success_message_after_adding_product_to_basket(self):
+        self.check_and_click_on_button_add()
+        assert self.is_not_element_present(*MainPageLocators.MESSAGE_SHOP)
+
+    def test_guest_cant_see_success_message(self):
+        assert self.is_not_element_present(*MainPageLocators.MESSAGE_SHOP)
+
+    def test_message_disappeared_after_adding_product_to_basket(self):
+        self.check_and_click_on_button_add()
+        time.sleep(2)
+        assert  self.is_disappeared(*MainPageLocators.MESSAGE_SHOP)
+
+
     def check_and_click_on_button_add(self):
-        assert self.is_element_present(*MainPageLocators.BUTTON_ADD_SHOP), 'Element does\'t present'
+        #assert self.is_element_present(*MainPageLocators.BUTTON_ADD_SHOP), 'Element does\'t present'
         self.click(*MainPageLocators.BUTTON_ADD_SHOP)
 
     def names_of_product(self):
@@ -32,4 +45,8 @@ class ProductPage(BasePage):
 
     def check_all_mesage(self):
        x = self.get_text(*MainPageLocators.MESSAGE_SHOP)
-       assert x == 'Coders at Work был добавлен в вашу корзину.'
+       assert x == 'Coders at Work был добавлен в вашу корзину.', 'Элемента нет в корзине'
+
+
+
+
