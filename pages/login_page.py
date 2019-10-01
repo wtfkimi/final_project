@@ -1,5 +1,6 @@
 from .base_page import BasePage
 from final_project.locators import MainPageLocators
+from final_project.locators import BasePageLocators
 
 class LoginPage(BasePage):
     def should_be_login_page(self):
@@ -12,9 +13,9 @@ class LoginPage(BasePage):
 
 
     def should_be_login_form(self):
-        assert self.is_element_present(*MainPageLocators.LOGIN_NAME), 'Field \'Адрес электронной почты \' in login form does not found'
+        assert self.is_element_present(*BasePageLocators.LOGIN_NAME), 'Field \'Адрес электронной почты \' in login form does not found'
 
 
     def should_be_register_form(self):
-        assert self.is_element_present(*MainPageLocators.REGISTRATION_NAME), 'Field \'Адрес электронной почты \' in registration form does not found'
+        assert self.is_element_present(*BasePageLocators.REGISTRATION_NAME), 'Field \'Адрес электронной почты \' in registration form does not found'
 
